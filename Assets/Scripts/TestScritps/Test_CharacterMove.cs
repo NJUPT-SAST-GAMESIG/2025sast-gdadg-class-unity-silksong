@@ -14,12 +14,16 @@ public class Test_CharactorMove : MonoBehaviour
 
     public bool isGrounded = false;
 
+    private Animator animator;
+
     void Start()
     {
         if (rigidbody2D == null)
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
+
+        animator = GetComponent<Animator>();
 
     }
 
@@ -36,17 +40,19 @@ public class Test_CharactorMove : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(-speed, rigidbody2D.velocity.y);
             transform.localScale = new Vector3(1, 1, 0);
-            
+            animator.SetBool("isMoving", true);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rigidbody2D.velocity = new Vector2(speed, rigidbody2D.velocity.y);
             transform.localScale = new Vector3(-1, 1, 0);
+            animator.SetBool("isMoving", true);
 
         }
         else
         {
             rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -55,6 +61,7 @@ public class Test_CharactorMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) &&isGrounded)
         {
             rigidbody2D.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+            animator.SetBool("isJumping", true);
         }
     }
     
