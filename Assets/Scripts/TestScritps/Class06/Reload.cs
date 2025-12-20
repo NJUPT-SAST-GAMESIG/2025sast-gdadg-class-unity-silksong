@@ -5,19 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Reload : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if  (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            
+            string currentScene = SceneManager.GetActiveScene().path;
+            Debug.Log(currentScene);
         }
     }
     

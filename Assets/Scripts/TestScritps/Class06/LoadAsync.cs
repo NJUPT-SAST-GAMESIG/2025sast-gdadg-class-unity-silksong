@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadAsync : MonoBehaviour
 {
@@ -13,29 +14,16 @@ public class LoadAsync : MonoBehaviour
     [SerializeField] TMP_Text progressText;
     [SerializeField] private GameObject mainmenu;
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public void LoadSceneAsync()
     {
         StartCoroutine(LoadAsyncScene("class_06"));
-        
-
     }
 
     IEnumerator LoadAsyncScene(string scenename)
     {
         mainmenu.SetActive(false);
         loading.SetActive(true);
-        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scenename);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scenename);
         
         asyncLoad.allowSceneActivation = false;
         while (!asyncLoad.isDone)
